@@ -1,79 +1,198 @@
+/* ==========================================================================
+   HOJA DE ESTILOS - TASKSHIELD (style.css)
+   Explicado paso a paso para que se entienda qué hace cada cosa.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. FONDO DE TODA LA PÁGINA
+   -------------------------------------------------------------------------- */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f9;
-    margin: 0;
-    padding: 20px;
+    font-family: Arial, sans-serif; /* Tipo de letra normal y legible */
+    background-color: #f4f6f9;     /* Color de fondo gris clarito */
+    margin: 0;                     /* Quita los márgenes por defecto */
+    padding: 20px;                 /* Espacio alrededor de la pantalla */
 }
 
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* --------------------------------------------------------------------------
+   2. CAJA BLANCA PRINCIPAL (Contenedor)
+   -------------------------------------------------------------------------- */
+.caja {
+    max-width: 800px;              /* Ancho máximo de la caja */
+    margin: 0 auto;                /* Centra la caja en medio de la pantalla */
+    background-color: #ffffff;     /* Fondo blanco */
+    padding: 25px;                 /* Relleno por dentro para que no quede pegado al borde */
+    border-radius: 8px;            /* Esquinas redondeadas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para que resalte */
 }
 
+/* Para el formulario usamos una caja un poco más estrecha */
+.caja-formulario {
+    max-width: 500px;
+}
+
+/* --------------------------------------------------------------------------
+   3. TÍTULOS Y CABECERA
+   -------------------------------------------------------------------------- */
 h1 {
-    color: #333;
-    margin-top: 0;
+    color: #333333;                /* Color del texto oscuro */
+    margin-top: 0;                 /* Quita el espacio superior que trae por defecto */
+    margin-bottom: 20px;           /* Espacio debajo del título */
 }
 
+/* Pone el título y el botón en la misma fila (uno a la izquierda y otro a la derecha) */
+.cabecera {
+    display: flex;
+    justify-content: space-between;/* Uno a la izquierda, otro a la derecha */
+    align-items: center;           /* Alineados al centro verticalmente */
+    margin-bottom: 20px;           /* Espacio con la tabla de abajo */
+}
+
+.cabecera h1 {
+    margin: 0;                     /* Quitamos margen al título dentro de la cabecera */
+}
+
+/* --------------------------------------------------------------------------
+   4. TABLA DE INCIDENCIAS (index.php)
+   -------------------------------------------------------------------------- */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
+    width: 100%;                   /* La tabla ocupa todo el ancho de la caja */
+    border-collapse: collapse;     /* Une los bordes de las celdas para que no queden dobles */
+    margin-top: 10px;
 }
 
-th,
-td {
-    padding: 10px 12px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
+th, td {
+    padding: 10px 12px;            /* Espacio dentro de cada celda */
+    border-bottom: 1px solid #dddddd; /* Línea gris finita debajo de cada fila */
+    text-align: left;              /* Texto alineado a la izquierda */
 }
 
 th {
-    background-color: #f8f9fa;
-    color: #555;
+    background-color: #f8f9fa;     /* Fondo gris suave para los encabezados */
+    color: #555555;                /* Texto gris oscuro */
 }
 
 tr:hover {
-    background-color: #f1f5f9;
+    background-color: #f1f5f9;     /* Fondo gris claro al pasar el ratón por encima */
 }
 
-.badge {
-    padding: 3px 8px;
+/* --------------------------------------------------------------------------
+   5. PASTILLAS / ETIQUETAS DE COLORES (Prioridades y Estados)
+   -------------------------------------------------------------------------- */
+/* Forma base de la pastilla */
+.etiqueta {
+    padding: 4px 8px;              /* Tamaño de la pastilla */
+    border-radius: 4px;            /* Bordes redondos */
+    font-size: 12px;               /* Letra más pequeña */
+    font-weight: bold;             /* Texto en negrita */
+    display: inline-block;
+}
+
+/* Colores según la Prioridad */
+.Alta, .alta {
+    background-color: #f8d7da;     /* Fondo rojo suave */
+    color: #721c24;                /* Letra roja oscura */
+}
+
+.Media, .media {
+    background-color: #fff3cd;     /* Fondo amarillo suave */
+    color: #856404;                /* Letra marrón / ámbar */
+}
+
+.Baja, .baja {
+    background-color: #d1ecf1;     /* Fondo azul suave */
+    color: #0c5460;                /* Letra azul oscura */
+}
+
+/* Colores según el Estado */
+.Pendiente, .pendiente {
+    background-color: #ffeeba;     /* Fondo naranja / amarillo */
+    color: #856404;                /* Letra oscura */
+}
+
+.Proceso, .proceso {
+    background-color: #e2e3e5;     /* Fondo gris */
+    color: #383d41;                /* Letra gris oscura */
+}
+
+.Resuelta, .resuelta {
+    background-color: #d4edda;     /* Fondo verde */
+    color: #155724;                /* Letra verde oscura */
+}
+
+/* --------------------------------------------------------------------------
+   6. FORMULARIO (nueva_incidencia.php)
+   -------------------------------------------------------------------------- */
+/* Cada bloque con su etiqueta y su casilla */
+.campo {
+    margin-bottom: 15px;           /* Separación entre cada pregunta del formulario */
+}
+
+/* El texto encima de la casilla (Título, Descripción, etc.) */
+label {
+    display: block;                /* Hace que el texto esté en su propia línea, arriba */
+    margin-bottom: 5px;            /* Espacio pequeño con la casilla de abajo */
+    font-weight: bold;             /* Texto en negrita */
+    color: #333333;
+}
+
+/* Las casillas donde escribe el usuario (input, select, textarea) */
+input, select, textarea {
+    width: 100%;                   /* Ocupan todo el ancho */
+    padding: 8px 10px;             /* Espacio para escribir cómodamente */
+    border: 1px solid #cccccc;     /* Borde gris */
+    border-radius: 4px;            /* Bordes redondos */
+    box-sizing: border-box;        /* Evita que se salga del ancho */
+    font-family: inherit;          /* Mismo tipo de letra que la página */
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;              /* Solo permite agrandar hacia abajo */
+}
+
+/* --------------------------------------------------------------------------
+   7. BOTONES
+   -------------------------------------------------------------------------- */
+/* Botón azul principal */
+.boton {
+    display: inline-block;
+    padding: 8px 16px;             /* Tamaño del botón */
+    background-color: #2563eb;     /* Color azul */
+    color: #ffffff;                /* Texto blanco */
+    text-decoration: none;         /* Quita el subrayado de enlace */
+    border: none;                  /* Quita el borde feo por defecto */
+    border-radius: 4px;            /* Bordes redondos */
+    cursor: pointer;               /* Sale la mano al pasar el ratón */
+    font-size: 14px;
+}
+
+.boton:hover {
+    background-color: #1d4ed8;     /* Azul más oscuro al pasar el ratón */
+}
+
+/* Botón gris (para volver o cancelar) */
+.boton-gris {
+    background-color: #6c757d;     /* Color gris */
+}
+
+.boton-gris:hover {
+    background-color: #5a6268;     /* Gris más oscuro al pasar el ratón */
+}
+
+/* Fila para poner los botones juntos con espacio */
+.fila-botones {
+    display: flex;
+    gap: 10px;                     /* Separación de 10 píxeles entre botones */
+    margin-top: 20px;              /* Espacio por encima de los botones */
+}
+
+/* --------------------------------------------------------------------------
+   8. MENSAJE DE ERROR
+   -------------------------------------------------------------------------- */
+.mensaje-error {
+    background-color: #f8d7da;     /* Fondo rojo suave */
+    color: #721c24;                /* Texto rojo oscuro */
+    padding: 10px;
     border-radius: 4px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.badge-alta {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-.badge-media {
-    background: #fff3cd;
-    color: #856404;
-}
-
-.badge-baja {
-    background: #d1ecf1;
-    color: #0c5460;
-}
-
-.badge-pendiente {
-    background: #ffeeba;
-    color: #856404;
-}
-
-.badge-en-proceso {
-    background: #e2e3e5;
-    color: #383d41;
-}
-
-.badge-resuelta {
-    background: #d4edda;
-    color: #155724;
+    margin-bottom: 15px;           /* Espacio con el formulario */
 }

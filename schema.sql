@@ -28,3 +28,4 @@ INSERT INTO incidencias (titulo, descripcion, prioridad, email_cliente) VALUES
 ('Correo no sincroniza', 'Outlook no actualiza desde esta mañana.', 'Alta', 'pedro@empresa.local'),
 ('Alta de nuevo empleado', 'Crear usuario y equipo para RR. HH.', 'Media', 'rrhh@empresa.local'),
 ('VPN caída', 'Varios usuarios no pueden conectarse en remoto.', 'Alta', 'carmen@empresa.local');
+
