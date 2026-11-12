@@ -1,5 +1,4 @@
 CREATE DATABASE IF NOT EXISTS taskshield
-    CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE taskshield;
 
 DROP TABLE IF EXISTS incidencias;
