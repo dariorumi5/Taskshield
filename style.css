@@ -173,7 +173,7 @@ textarea {
 .boton {
     display: inline-block;
     padding: 8px 16px;
-    background-color: #2563eb;
+    background-color: #59698b;
     color: #ffffff;
     text-decoration: none;
     border: none;
@@ -184,7 +184,7 @@ textarea {
 }
 
 .boton:hover {
-    background-color: #1d4ed8;
+    background-color: #414e73;
 }
 
 .boton-gris {
@@ -197,7 +197,7 @@ textarea {
 
 /* Botón verde (para resolver) */
 .boton-verde {
-    background-color: #16a34a;
+    background-color: #477f5c;
     padding: 6px 12px;
     font-size: 13px;
 }
@@ -208,7 +208,7 @@ textarea {
 
 /* Botón rojo (para eliminar) */
 .boton-rojo {
-    background-color: #dc2626;
+    background-color: #613030;
 }
 
 .boton-rojo:hover {

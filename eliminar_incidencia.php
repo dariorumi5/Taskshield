@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php if ($mensaje === 'exito'): ?>
         <div class="mensaje-exito">
-            ✓ La incidencia #<?= (int) $id ?> ha sido eliminada correctamente.
+            ✓ La incidencia <?= (int) $id ?> se eliminó correctamente.
         </div>
         <a href="index.php" class="boton" style="margin-top: 15px; display: inline-block;">
             ← Volver al listado
