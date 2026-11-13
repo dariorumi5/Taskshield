@@ -16,7 +16,7 @@ CREATE TABLE incidencias (
     descripcion TEXT NOT NULL,
     prioridad ENUM('Baja','Media','Alta') NOT NULL DEFAULT 'Media',
     email_cliente VARCHAR(100) NOT NULL,
-    estado ENUM('Pendiente','En Proceso','Resuelta') NOT NULL DEFAULT 'Pendiente',
+    estado ENUM('Pendiente','Asignado','En Proceso','Resuelta') NOT NULL DEFAULT 'Pendiente',
     tecnico_id INT UNSIGNED NULL,
     FOREIGN KEY (tecnico_id) REFERENCES tecnicos(id)
 )

@@ -5,9 +5,9 @@ $error = '';
 
 // Si el usuario pulsa el botón de crear la incidencia
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $titulo        = trim($_POST['titulo'] ?? '');
-    $descripcion   = trim($_POST['descripcion'] ?? '');
-    $prioridad     = $_POST['prioridad'] ?? 'Media';
+    $titulo = trim($_POST['titulo'] ?? '');
+    $descripcion = trim($_POST['descripcion'] ?? '');
+    $prioridad = $_POST['prioridad'] ?? 'Media';
     $email_cliente = trim($_POST['email_cliente'] ?? '');
 
     // Comprobamos que no haya ningún campo vacío

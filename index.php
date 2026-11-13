@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/conexion.php';
 
-// Consultamos las incidencias que no estén resueltas
-$stmt = $pdo->prepare("SELECT id, titulo, prioridad, estado, email_cliente FROM incidencias WHERE estado <> :estado");
-$stmt->execute([':estado' => 'Resuelta']);
+// MOSTRAMOS TODAS LAS INCIDENCIAS 
+$stmt = $pdo->prepare("SELECT id, titulo, prioridad, estado, email_cliente FROM incidencias");
+$stmt->execute();
 $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -17,8 +17,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 
-<div class="caja">
-    <!-- Cabecera: Título y botón en la misma fila -->
+<div class="lista">
     <div class="cabecera">
         <h1>Incidencias Activas</h1>
         <a href="nueva_incidencia.php" class="boton">+ Crear Incidencia</a>
@@ -35,6 +34,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Prioridad</th>
                     <th>Estado</th>
                     <th>Email Cliente</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,18 +43,22 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= (int) $incidencia['id'] ?></td>
                         <td><?= htmlspecialchars($incidencia['titulo']) ?></td>
                         <td>
-                            <!-- La clase 'etiqueta' da la forma y el valor de la base de datos (Alta, Media, Baja) le da el color -->
                             <span class="etiqueta <?= htmlspecialchars($incidencia['prioridad']) ?>">
                                 <?= htmlspecialchars($incidencia['prioridad']) ?>
                             </span>
                         </td>
                         <td>
-                            <!-- La clase 'etiqueta' da la forma y el estado (Pendiente, Proceso, Resuelta) le da el color -->
                             <span class="etiqueta <?= htmlspecialchars($incidencia['estado']) ?>">
                                 <?= htmlspecialchars($incidencia['estado']) ?>
                             </span>
                         </td>
                         <td><?= htmlspecialchars($incidencia['email_cliente']) ?></td>
+                        <td>
+                            <!-- Botón para editar (lleva al formulario de edición) -->
+                            <a href="editar_incidencia.php?id=<?= (int) $incidencia['id'] ?>" class="boton">Editar</a>
+                            <!-- Botón para eliminar -->
+                            <a href="eliminar_incidencia.php?id=<?= (int) $incidencia['id'] ?>" class="boton boton-rojo">Eliminar</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

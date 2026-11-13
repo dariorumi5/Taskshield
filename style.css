@@ -1,198 +1,239 @@
-/* ==========================================================================
-   HOJA DE ESTILOS - TASKSHIELD (style.css)
-   Explicado paso a paso para que se entienda qué hace cada cosa.
-   ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   1. FONDO DE TODA LA PÁGINA
-   -------------------------------------------------------------------------- */
+/* 1. Fondo de toda la página */
 body {
-    font-family: Arial, sans-serif; /* Tipo de letra normal y legible */
-    background-color: #f4f6f9;     /* Color de fondo gris clarito */
-    margin: 0;                     /* Quita los márgenes por defecto */
-    padding: 20px;                 /* Espacio alrededor de la pantalla */
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 40px 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Pone cualquier caja en el medio de la pantalla */
 }
 
-/* --------------------------------------------------------------------------
-   2. CAJA BLANCA PRINCIPAL (Contenedor)
-   -------------------------------------------------------------------------- */
+/* 2. Caja para formularios (nueva_incidencia.php) */
 .caja {
-    max-width: 800px;              /* Ancho máximo de la caja */
-    margin: 0 auto;                /* Centra la caja en medio de la pantalla */
-    background-color: #ffffff;     /* Fondo blanco */
-    padding: 25px;                 /* Relleno por dentro para que no quede pegado al borde */
-    border-radius: 8px;            /* Esquinas redondeadas */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para que resalte */
+    width: 500px;
+    max-width: 95%;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
-/* Para el formulario usamos una caja un poco más estrecha */
-.caja-formulario {
-    max-width: 500px;
+/* 3. Caja para la lista (index.php) */
+.lista {
+    width: 1000px;
+    /* Ancho para que todas las columnas quepan holgadas */
+    max-width: 95%;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow-x: auto;
 }
 
-/* --------------------------------------------------------------------------
-   3. TÍTULOS Y CABECERA
-   -------------------------------------------------------------------------- */
+/* 4. Títulos y cabecera */
 h1 {
-    color: #333333;                /* Color del texto oscuro */
-    margin-top: 0;                 /* Quita el espacio superior que trae por defecto */
-    margin-bottom: 20px;           /* Espacio debajo del título */
+    color: #333333;
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
-/* Pone el título y el botón en la misma fila (uno a la izquierda y otro a la derecha) */
 .cabecera {
     display: flex;
-    justify-content: space-between;/* Uno a la izquierda, otro a la derecha */
-    align-items: center;           /* Alineados al centro verticalmente */
-    margin-bottom: 20px;           /* Espacio con la tabla de abajo */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .cabecera h1 {
-    margin: 0;                     /* Quitamos margen al título dentro de la cabecera */
+    margin: 0;
 }
 
-/* --------------------------------------------------------------------------
-   4. TABLA DE INCIDENCIAS (index.php)
-   -------------------------------------------------------------------------- */
+/* 5. Tabla de incidencias (index.php) */
 table {
-    width: 100%;                   /* La tabla ocupa todo el ancho de la caja */
-    border-collapse: collapse;     /* Une los bordes de las celdas para que no queden dobles */
+    width: 100%;
+    /* CAMBIO: antes 70%. Ahora ocupa todo el ancho de .lista */
+    border-collapse: collapse;
     margin-top: 10px;
 }
 
-th, td {
-    padding: 10px 12px;            /* Espacio dentro de cada celda */
-    border-bottom: 1px solid #dddddd; /* Línea gris finita debajo de cada fila */
-    text-align: left;              /* Texto alineado a la izquierda */
+th,
+td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
 }
 
 th {
-    background-color: #f8f9fa;     /* Fondo gris suave para los encabezados */
-    color: #555555;                /* Texto gris oscuro */
+    background-color: #f8f9fa;
+    color: #555555;
+    white-space: nowrap;
 }
 
 tr:hover {
-    background-color: #f1f5f9;     /* Fondo gris claro al pasar el ratón por encima */
+    background-color: #f1f5f9;
 }
 
-/* --------------------------------------------------------------------------
-   5. PASTILLAS / ETIQUETAS DE COLORES (Prioridades y Estados)
-   -------------------------------------------------------------------------- */
-/* Forma base de la pastilla */
+table select {
+    width: auto;
+    min-width: 140px;
+    padding: 6px 10px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+/* 6. Etiquetas de colores (Prioridades y Estados) */
 .etiqueta {
-    padding: 4px 8px;              /* Tamaño de la pastilla */
-    border-radius: 4px;            /* Bordes redondos */
-    font-size: 12px;               /* Letra más pequeña */
-    font-weight: bold;             /* Texto en negrita */
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
     display: inline-block;
+    white-space: nowrap;
 }
 
-/* Colores según la Prioridad */
-.Alta, .alta {
-    background-color: #f8d7da;     /* Fondo rojo suave */
-    color: #721c24;                /* Letra roja oscura */
+/* Prioridad */
+.Alta,
+.alta {
+    background-color: #f8d7da;
+    color: #721c24;
 }
 
-.Media, .media {
-    background-color: #fff3cd;     /* Fondo amarillo suave */
-    color: #856404;                /* Letra marrón / ámbar */
+.Media,
+.media {
+    background-color: #fff3cd;
+    color: #856404;
 }
 
-.Baja, .baja {
-    background-color: #d1ecf1;     /* Fondo azul suave */
-    color: #0c5460;                /* Letra azul oscura */
+.Baja,
+.baja {
+    background-color: #d1ecf1;
+    color: #0c5460;
 }
 
-/* Colores según el Estado */
-.Pendiente, .pendiente {
-    background-color: #ffeeba;     /* Fondo naranja / amarillo */
-    color: #856404;                /* Letra oscura */
+/* Estado */
+.Pendiente,
+.pendiente {
+    background-color: #ffeeba;
+    color: #856404;
 }
 
-.Proceso, .proceso {
-    background-color: #e2e3e5;     /* Fondo gris */
-    color: #383d41;                /* Letra gris oscura */
+.Asignado,
+.asignado {
+    background-color: #e0f2fe;
+    color: #0369a1;
 }
 
-.Resuelta, .resuelta {
-    background-color: #d4edda;     /* Fondo verde */
-    color: #155724;                /* Letra verde oscura */
+.Proceso,
+.proceso {
+    background-color: #e2e3e5;
+    color: #383d41;
 }
 
-/* --------------------------------------------------------------------------
-   6. FORMULARIO (nueva_incidencia.php)
-   -------------------------------------------------------------------------- */
-/* Cada bloque con su etiqueta y su casilla */
+.Resuelta,
+.resuelta {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* 7. Formulario (nueva_incidencia.php) */
 .campo {
-    margin-bottom: 15px;           /* Separación entre cada pregunta del formulario */
+    margin-bottom: 15px;
 }
 
-/* El texto encima de la casilla (Título, Descripción, etc.) */
 label {
-    display: block;                /* Hace que el texto esté en su propia línea, arriba */
-    margin-bottom: 5px;            /* Espacio pequeño con la casilla de abajo */
-    font-weight: bold;             /* Texto en negrita */
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
     color: #333333;
 }
 
-/* Las casillas donde escribe el usuario (input, select, textarea) */
-input, select, textarea {
-    width: 100%;                   /* Ocupan todo el ancho */
-    padding: 8px 10px;             /* Espacio para escribir cómodamente */
-    border: 1px solid #cccccc;     /* Borde gris */
-    border-radius: 4px;            /* Bordes redondos */
-    box-sizing: border-box;        /* Evita que se salga del ancho */
-    font-family: inherit;          /* Mismo tipo de letra que la página */
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
     font-size: 14px;
 }
 
 textarea {
-    resize: vertical;              /* Solo permite agrandar hacia abajo */
+    resize: vertical;
 }
 
-/* --------------------------------------------------------------------------
-   7. BOTONES
-   -------------------------------------------------------------------------- */
-/* Botón azul principal */
+/* 8. Botones */
 .boton {
     display: inline-block;
-    padding: 8px 16px;             /* Tamaño del botón */
-    background-color: #2563eb;     /* Color azul */
-    color: #ffffff;                /* Texto blanco */
-    text-decoration: none;         /* Quita el subrayado de enlace */
-    border: none;                  /* Quita el borde feo por defecto */
-    border-radius: 4px;            /* Bordes redondos */
-    cursor: pointer;               /* Sale la mano al pasar el ratón */
+    padding: 8px 16px;
+    background-color: #2563eb;
+    color: #ffffff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
     font-size: 14px;
+    white-space: nowrap;
 }
 
 .boton:hover {
-    background-color: #1d4ed8;     /* Azul más oscuro al pasar el ratón */
+    background-color: #1d4ed8;
 }
 
-/* Botón gris (para volver o cancelar) */
 .boton-gris {
-    background-color: #6c757d;     /* Color gris */
+    background-color: #6c757d;
 }
 
 .boton-gris:hover {
-    background-color: #5a6268;     /* Gris más oscuro al pasar el ratón */
+    background-color: #5a6268;
 }
 
-/* Fila para poner los botones juntos con espacio */
+/* Botón verde (para resolver) */
+.boton-verde {
+    background-color: #16a34a;
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.boton-verde:hover {
+    background-color: #15803d;
+}
+
+/* Botón rojo (para eliminar) */
+.boton-rojo {
+    background-color: #dc2626;
+}
+
+.boton-rojo:hover {
+    background-color: #b91c1c;
+}
+
 .fila-botones {
     display: flex;
-    gap: 10px;                     /* Separación de 10 píxeles entre botones */
-    margin-top: 20px;              /* Espacio por encima de los botones */
+    gap: 10px;
+    margin-top: 20px;
 }
 
-/* --------------------------------------------------------------------------
-   8. MENSAJE DE ERROR
-   -------------------------------------------------------------------------- */
+/* 9. Mensajes de éxito y error */
 .mensaje-error {
-    background-color: #f8d7da;     /* Fondo rojo suave */
-    color: #721c24;                /* Texto rojo oscuro */
+    background-color: #f8d7da;
+    color: #721c24;
     padding: 10px;
     border-radius: 4px;
-    margin-bottom: 15px;           /* Espacio con el formulario */
+    margin-bottom: 15px;
+}
+
+.mensaje-exito {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
 }
