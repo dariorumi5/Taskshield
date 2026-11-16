@@ -54,10 +54,9 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </td>
                         <td><?= htmlspecialchars($incidencia['email_cliente']) ?></td>
                         <td>
-                            <!-- Botón para editar (lleva al formulario de edición) -->
-                            <a href="editar_incidencia.php?id=<?= (int) $incidencia['id'] ?>" class="boton">Editar</a>
-                            <!-- Botón para eliminar -->
-                            <a href="eliminar_incidencia.php?id=<?= (int) $incidencia['id'] ?>" class="boton boton-rojo">Eliminar</a>
+                            
+                            <a href="editar_incidencia.php?id=<?= (int) $incidencia['id'] ?>" class="boton" title="Editar">✎</a>
+                            <a href="eliminar_incidencia.php?id=<?= (int) $incidencia['id'] ?>" class="boton boton-rojo" title="Eliminar">✕</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
