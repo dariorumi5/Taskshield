@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmtTec = $pdo->prepare("UPDATE tecnicos SET tareas_activas = tareas_activas + 1 WHERE id = :id");
                 $stmtTec->execute([':id' => $tecnico_id]);
             }
-
+            //Se guarda la incidencia en la base de datos 
             $pdo->commit();
 
             // Redirigimos de vuelta a la página principal
