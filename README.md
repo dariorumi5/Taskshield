@@ -13,7 +13,8 @@ Taskshield is a web application for managing incidents.
 1. Clone the repository
 2. Create a database and user
 3. Import the SQL file
-4. Access the application at http://localhost/Taskshield/index.php
+4. Open Xampp and start Apache and MySQL
+5. Access the application at http://localhost/Taskshield/index.php
 
 ## Tech Stack
 
