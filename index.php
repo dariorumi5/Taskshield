@@ -1,8 +1,11 @@
 <?php
 require_once __DIR__ . '/conexion.php';
 
-// MOSTRAMOS TODAS LAS INCIDENCIAS 
-$stmt = $pdo->prepare("SELECT id, titulo, prioridad, estado, email_cliente FROM incidencias");
+// MOSTRAMOS TODAS LAS INCIDENCIAS CON EL NOMBRE DEL TÉCNICO ASIGNADO
+$sql = "SELECT i.id, i.titulo, i.prioridad, i.estado, i.email_cliente, t.nombre AS tecnico_nombre 
+        FROM incidencias i 
+        LEFT JOIN tecnicos t ON i.tecnico_id = t.id";
+$stmt = $pdo->prepare($sql);
 $stmt->execute();
 $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -34,6 +37,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Prioridad</th>
                     <th>Estado</th>
                     <th>Email Cliente</th>
+                    <th>Técnico Asignado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -53,6 +57,13 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </span>
                         </td>
                         <td><?= htmlspecialchars($incidencia['email_cliente']) ?></td>
+                        <td>
+                            <?php if (!empty($incidencia['tecnico_nombre'])): ?>
+                                <?= htmlspecialchars($incidencia['tecnico_nombre']) ?>
+                            <?php else: ?>
+                                <span style="color: #888;">Sin asignar</span>
+                            <?php endif; ?>
+                        </td>       
                         <td>
                             
                             <a href="editar_incidencia.php?id=<?= (int) $incidencia['id'] ?>" class="boton" title="Editar">✎</a>

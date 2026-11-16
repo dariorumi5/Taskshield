@@ -3,33 +3,57 @@ require_once __DIR__ . '/conexion.php';
 
 $error = '';
 
+// Cargamos la lista de técnicos para el desplegable
+$stmtTecnicos = $pdo->query("SELECT id, nombre FROM tecnicos");
+$tecnicos = $stmtTecnicos->fetchAll(PDO::FETCH_ASSOC);
+
 // Si el usuario pulsa el botón de crear la incidencia
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $titulo = trim($_POST['titulo'] ?? '');
-    $descripcion = trim($_POST['descripcion'] ?? '');
-    $prioridad = $_POST['prioridad'] ?? 'Media';
+    $titulo        = trim($_POST['titulo'] ?? '');
+    $descripcion   = trim($_POST['descripcion'] ?? '');
+    $prioridad     = $_POST['prioridad'] ?? 'Media';
     $email_cliente = trim($_POST['email_cliente'] ?? '');
+    $tecnico_id    = !empty($_POST['tecnico_id']) ? (int) $_POST['tecnico_id'] : null;
 
-    // Comprobamos que no haya ningún campo vacío
+    // Comprobamos que no haya ningún campo obligatorio vacío
     if (empty($titulo) || empty($descripcion) || empty($email_cliente)) {
         $error = "Por favor, completa todos los campos obligatorios.";
     } elseif (!filter_var($email_cliente, FILTER_VALIDATE_EMAIL)) {
         $error = "El formato del correo electrónico no es válido.";
     } else {
-        // Guardamos la nueva incidencia en la base de datos
-        $sql = "INSERT INTO incidencias (titulo, descripcion, prioridad, email_cliente, estado) 
-                VALUES (:titulo, :descripcion, :prioridad, :email_cliente, 'Pendiente')";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':titulo', $titulo);
-        $stmt->bindParam(':descripcion', $descripcion);
-        $stmt->bindParam(':prioridad', $prioridad);
-        $stmt->bindParam(':email_cliente', $email_cliente);
+        // Si se asigna un técnico pasa a 'En Proceso', si no queda en 'Pendiente'
+        $estado = ($tecnico_id !== null) ? 'En Proceso' : 'Pendiente';
 
-        $stmt->execute();
+        try {
+            $pdo->beginTransaction();
 
-        // Redirigimos de vuelta a la página principal
-        header("Location: index.php");
-        exit;
+            $sql = "INSERT INTO incidencias (titulo, descripcion, prioridad, email_cliente, estado, tecnico_id) 
+                    VALUES (:titulo, :descripcion, :prioridad, :email_cliente, :estado, :tecnico_id)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':titulo'        => $titulo,
+                ':descripcion'   => $descripcion,
+                ':prioridad'     => $prioridad,
+                ':email_cliente' => $email_cliente,
+                ':estado'        => $estado,
+                ':tecnico_id'    => $tecnico_id,
+            ]);
+
+            // Si se asignó un técnico, incrementamos su contador de tareas activas
+            if ($tecnico_id !== null) {
+                $stmtTec = $pdo->prepare("UPDATE tecnicos SET tareas_activas = tareas_activas + 1 WHERE id = :id");
+                $stmtTec->execute([':id' => $tecnico_id]);
+            }
+
+            $pdo->commit();
+
+            // Redirigimos de vuelta a la página principal
+            header("Location: index.php");
+            exit;
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            $error = "Error al guardar la incidencia.";
+        }
     }
 }
 ?>
@@ -75,6 +99,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="campo">
             <label for="email_cliente">Email Cliente:</label>
             <input type="email" id="email_cliente" name="email_cliente" value="<?= htmlspecialchars($_POST['email_cliente'] ?? '') ?>" required>
+        </div>
+
+        <div class="campo">
+            <label for="tecnico_id">Asignar Técnico (opcional):</label>
+            <select id="tecnico_id" name="tecnico_id">
+                <option value="">Sin asignar</option>
+                <?php foreach ($tecnicos as $tecnico): ?>
+                    <option value="<?= (int) $tecnico['id'] ?>" <?= (($_POST['tecnico_id'] ?? '') == $tecnico['id']) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($tecnico['nombre']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         
         <div class="fila-botones">
